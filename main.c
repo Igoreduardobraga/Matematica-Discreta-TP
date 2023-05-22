@@ -1,17 +1,84 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include "ilhadeKoch.h"
+#include "espacodePeano.h"
+#include "novoFractal.h"
+
+FILE *arq_axioma, *estagio1, *estagio2, *estagio3, *estagio4, *final, *teste1, *teste2, *teste3;
+char caractere;
+
+// void ilhadeKoch(char axioma[], char regra[]);
+// void espacodePeano(char axioma[], char regra1[], char regra2[]);
+// void fractalMisto(char axioma[], char regra[]);
+
+void escreverAxioma(char axioma[], char regra[]);
+void removerEspacos(char* string);
 
 int main(){
 
-    FILE *arq_axioma, *estagio1, *estagio2, *estagio3, *estagio4;
-    char axioma[10] = "F+F+F+F";
-    char regra[20] = "F+F-F-FFF+F+F-F";
-    char caractere;
+    char *axioma = (char*)malloc((10 + 1) * sizeof(char));
+    char *regra = (char*)malloc((20 + 1) * sizeof(char));
+    int fractal;
 
+    printf("Fractal: ");
+    scanf("%d", &fractal);
+    printf("Axioma: ");
+    scanf("%s", axioma);
+    printf("Regra: ");
+    scanf("%s", regra);
+
+    if(fractal==5){
+        ilhadeKoch(axioma,regra);
+    }
+    else if(fractal==7){
+        char *regra2 = (char*)malloc((40 + 1) * sizeof(char));
+        printf("Regra 2: ");
+        scanf("%s", regra2);
+        removerEspacos(regra);
+        removerEspacos(regra2);
+        espacodePeano(axioma,regra, regra2);
+        free(regra2);
+    }
+    else{
+        char *regra2 = (char*)malloc((40 + 1) * sizeof(char));
+        printf("Regra 2: ");
+        scanf("%s", regra2);
+        removerEspacos(regra);
+        removerEspacos(regra2);
+        novoFractal("X","XFYFX+F+YFXFY-F-XFYFX", "+XF-YFY-FX+");    //angulo de 120
+        free(regra2);
+    }
+
+    free(axioma);
+    free(regra);
+
+    return 0;
+}
+
+void removerEspacos(char* string) {
+    int tamanho = strlen(string);
+    int i, j;
+
+    // Percorre a string original
+    for (i = 0, j = 0; i < tamanho; i++) {
+        // Verifica se o caractere atual não é um espaço
+        if (string[i] != ' ') {
+            // Copia o caractere para a nova posição na string
+            string[j] = string[i];
+            j++;
+        }
+    }
+
+    // Adiciona o caractere nulo para indicar o fim da nova string
+    string[j] = '\0';
+}
+
+void escreverAxioma(char axioma[],char regra[]){
     arq_axioma = fopen("arq_axioma.txt","w");
     if(arq_axioma == NULL){
         printf("Erro na abertura do arquivo!\n");
-        return 1;
+        exit(0);
     }
 
     fputs(axioma,arq_axioma);
@@ -21,79 +88,6 @@ int main(){
     arq_axioma = fopen("arq_axioma.txt","r");
     if(arq_axioma == NULL){
         printf("Erro na abertura do arquivo!\n");
-        return 1;
+        exit(0);
     }
-
-    // scanf("%s",arq_axioma);
-    // scanf("%s",regra);
-
-    // fputs(arq_axioma, arq_axioma);
-
-    // fclose(arq_axioma);
-
-    // Abrir o arquivo novamente em modo de leitura e escrita
-    estagio1 = fopen("estagio1.txt", "w");
-    if (arq_axioma == NULL) {
-        printf("Erro ao abrir o arquivo.\n");
-        return 1;
-    }
-
-    int i;
-    // long posicao = ftell(axioma);
-    // for(i = 0 ; i<2 ; i++){
-    while ((caractere = fgetc(arq_axioma)) != EOF) {
-        if(caractere=='F'){
-            fputs(regra, estagio1);
-        }
-        else{
-            fputc(caractere, estagio1);
-        }
-    }
-
-    fclose(arq_axioma);
-    fclose(estagio1);
-    estagio1 = fopen("estagio1.txt", "r");
-    estagio2 = fopen("estagio2.txt", "w");
-
-    while ((caractere = fgetc(estagio1)) != EOF) {
-        if(caractere=='F'){
-            fputs(regra, estagio2);
-        }
-        else{
-            fputc(caractere, estagio2);
-        }
-    }
-
-    fclose(estagio1);
-    fclose(estagio2);
-    estagio2 = fopen("estagio2.txt", "r");
-    estagio3 = fopen("estagio3.txt", "w");
-
-    while ((caractere = fgetc(estagio2)) != EOF) {
-        if(caractere=='F'){
-            fputs(regra, estagio3);
-        }
-        else{
-            fputc(caractere, estagio3);
-        }
-    }
-
-    fclose(estagio2);
-    fclose(estagio3);
-    estagio3 = fopen("estagio3.txt", "r");
-    estagio4 = fopen("estagio4.txt", "w");
-
-    while ((caractere = fgetc(estagio3)) != EOF) {
-        if(caractere=='F'){
-            fputs(regra, estagio4);
-        }
-        else{
-            fputc(caractere, estagio4);
-        }
-    }
-
-    fclose(estagio3);
-    fclose(estagio4);
-
-    return 0;
 }
