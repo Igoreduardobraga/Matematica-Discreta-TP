@@ -5,7 +5,7 @@
 #include "espacodePeano.h"
 #include "novoFractal.h"
 
-FILE *arq_axioma, *estagio1, *estagio2, *estagio3, *estagio4, *final, *teste1, *teste2, *teste3;
+FILE *arq_axioma, *estagio1, *arq_final;
 char caractere;
 
 // void ilhadeKoch(char axioma[], char regra[]);
@@ -18,21 +18,25 @@ void removerEspacos(char* string);
 int main(){
 
     char *axioma = (char*)malloc((10 + 1) * sizeof(char));
-    char *regra = (char*)malloc((20 + 1) * sizeof(char));
+    char *regra = (char*)malloc((40 + 1) * sizeof(char));
     int fractal;
 
+    // strcpy(axioma,"Y");
+    // strcpy(regra,"XFYFX+F+YFXFY-F-XFYFX");
     printf("Fractal: ");
     scanf("%d", &fractal);
     printf("Axioma: ");
     scanf("%s", axioma);
-    printf("Regra: ");
-    scanf("%s", regra);
 
     if(fractal==5){
+        printf("Regra: ");
+        scanf("%s", regra);
         ilhadeKoch(axioma,regra);
     }
     else if(fractal==7){
         char *regra2 = (char*)malloc((40 + 1) * sizeof(char));
+        printf("Regra 1: ");
+        scanf("%s", regra);
         printf("Regra 2: ");
         scanf("%s", regra2);
         removerEspacos(regra);
@@ -41,13 +45,8 @@ int main(){
         free(regra2);
     }
     else{
-        char *regra2 = (char*)malloc((40 + 1) * sizeof(char));
-        printf("Regra 2: ");
-        scanf("%s", regra2);
-        removerEspacos(regra);
-        removerEspacos(regra2);
-        novoFractal("X","XFYFX+F+YFXFY-F-XFYFX", "+XF-YFY-FX+");    //angulo de 120
-        free(regra2);
+        // strcpy(regra2,"-YF+XFX+FY");
+        novoFractal("YY","-YF+XFX+FY", "YFXFY-F-XFYFX+F+YFXFY");    //angulo de 120
     }
 
     free(axioma);

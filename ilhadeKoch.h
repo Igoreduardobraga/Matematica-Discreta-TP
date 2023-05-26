@@ -4,75 +4,62 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-extern FILE *arq_axioma, *estagio1, *estagio2, *estagio3, *estagio4;
+extern FILE *arq_axioma, *estagio1, *arq_final;
 extern char caractere;
 
-void escreverAxioma(char axioma[],char regra[]);
+void escreverAxioma(char axioma[], char regra[]);
 
 void ilhadeKoch(char axioma[], char regra[]){
 
-    escreverAxioma(axioma,regra);
+    escreverAxioma(axioma, regra);
 
     estagio1 = fopen("estagio1.txt", "w");
-    if (arq_axioma == NULL) {
-        printf("Erro ao abrir o arquivo.\n");
-        exit(0);
-    }
+    arq_final = fopen("saidas/ilha_de_Koch.txt", "w");
 
-    while ((caractere = fgetc(arq_axioma)) != EOF) {
-        if(caractere=='F'){
-            fputs(regra, estagio1);
+    fprintf(arq_final, "ILHA DE KOCH\n\nAxioma: F+F+F+F\nÂngulo: 90\nRegra: F+F-F-FFF+F+F-F");
+    fprintf(arq_final, "\n\n-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n");
+    fprintf(arq_final, "ESTÁGIO 1: %s", axioma);
+    int i;
+    for(i = 2 ; i<5 ; i++){
+        while ((caractere = fgetc(arq_axioma)) != EOF) {
+            if(caractere=='F'){
+                fputs(regra, estagio1);
+            }
+            else{
+                fputc(caractere, estagio1);
+            }
         }
-        else{
-            fputc(caractere, estagio1);
+
+        if(i%2==0){
+            fclose(estagio1);
+            estagio1 = fopen("estagio1.txt", "r");
         }
-    }
-
-    fclose(arq_axioma);
-    fclose(estagio1);
-
-    estagio1 = fopen("estagio1.txt", "r");
-    estagio2 = fopen("estagio2.txt", "w");
-
-    while ((caractere = fgetc(estagio1)) != EOF) {
-        if(caractere=='F'){
-            fputs(regra, estagio2);
+        else if(i%2==1){
+            fclose(estagio1);
+            estagio1 = fopen("arq_axioma.txt", "r");
         }
-        else{
-            fputc(caractere, estagio2);
-        }
-    }
 
-    fclose(estagio1);
-    fclose(estagio2);
-    estagio2 = fopen("estagio2.txt", "r");
-    estagio3 = fopen("estagio3.txt", "w");
-
-    while ((caractere = fgetc(estagio2)) != EOF) {
-        if(caractere=='F'){
-            fputs(regra, estagio3);
+        fprintf(arq_final, "\n\n-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n");
+        fprintf(arq_final, "ESTÁGIO %d: ", i);
+        while ((caractere = fgetc(estagio1)) != EOF) {
+            fputc(caractere, arq_final);
         }
-        else{
-            fputc(caractere, estagio3);
-        }
-    }
 
-    fclose(estagio2);
-    fclose(estagio3);
-    estagio3 = fopen("estagio3.txt", "r");
-    estagio4 = fopen("estagio4.txt", "w");
+        fclose(arq_axioma);
+        fclose(estagio1);
 
-    while ((caractere = fgetc(estagio3)) != EOF) {
-        if(caractere=='F'){
-            fputs(regra, estagio4);
+        if(i%2==0){
+            arq_axioma = fopen("estagio1.txt", "r");
+            estagio1 = fopen("arq_axioma.txt", "w");
         }
-        else{
-            fputc(caractere, estagio4);
+        else if(i%2==1){
+            arq_axioma = fopen("arq_axioma.txt", "r");
+            estagio1 = fopen("estagio1.txt", "w");
         }
     }
-
-    fclose(estagio3);
-    fclose(estagio4);
+    fclose(arq_final);
+    remove("estagio1.txt");
+    remove("arq_axioma.txt");
 }
 
 #endif
