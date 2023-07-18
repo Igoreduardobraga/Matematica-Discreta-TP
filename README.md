@@ -2,20 +2,13 @@
 Trabalho pratico que consiste em criar fractais na forma de L-sistemas a partir da linguagem C e transforma-lo em imagens por meio de ferramentas online
 
 
-<table>
-  <tr>
-    <td>
-      <img src="https://github.com/Igoreduardobraga/Matematica-Discreta-TP/assets/94845990/713ab646-5493-4188-b297-c7f9ee82baa3" alt="Espaco de Peano" style="witdh:300px; height: 300px;">
-    </td>
-    <td>
-      <img src="https://github.com/Igoreduardobraga/Matematica-Discreta-TP/assets/94845990/973682bd-94c0-433b-9915-82bf9a849f01" alt="Ilha de Koch" style="witdh:300px; height: 300px;">
-    </td>
-    <td>
-      <img src="https://github.com/Igoreduardobraga/Matematica-Discreta-TP/blob/main/img/Novo%20Fractal/S%C3%A9timo%20est%C3%A1gio.png" alt="Fractal definido por mim" style="witdh:300px; height: 300px;">
-    </td>
-  </tr>
-</table>
-
+<p align="center">
+  <img src="https://github.com/Igoreduardobraga/Matematica-Discreta-TP/assets/94845990/713ab646-5493-4188-b297-c7f9ee82baa3" alt="Espaco de Peano" width="500" height="500">
+  <img src="https://github.com/Igoreduardobraga/Matematica-Discreta-TP/assets/94845990/973682bd-94c0-433b-9915-82bf9a849f01" alt="Ilha de Koch" width="500" height="500">
+</p>
+<p align="center">
+  <img src="https://github.com/Igoreduardobraga/Matematica-Discreta-TP/blob/main/img/Novo%20Fractal/S%C3%A9timo%20est%C3%A1gio.png" alt="Fractal definido por mim" width="500" height="500">
+</p>
 
 ## Esse trabalho consiste em três programas:
 
