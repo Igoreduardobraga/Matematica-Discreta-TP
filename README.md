@@ -3,11 +3,11 @@ Trabalho pratico que consiste em criar fractais na forma de L-sistemas a partir 
 
 
 <p align="center">
-  <img src="https://github.com/Igoreduardobraga/Matematica-Discreta-TP/assets/94845990/713ab646-5493-4188-b297-c7f9ee82baa3" alt="Espaco de Peano" width="500" height="500">
-  <img src="https://github.com/Igoreduardobraga/Matematica-Discreta-TP/assets/94845990/973682bd-94c0-433b-9915-82bf9a849f01" alt="Ilha de Koch" width="500" height="500">
+  <img src="https://github.com/Igoreduardobraga/Matematica-Discreta-TP/assets/94845990/713ab646-5493-4188-b297-c7f9ee82baa3" alt="Espaco de Peano" width="300" height="300">
+  <img src="https://github.com/Igoreduardobraga/Matematica-Discreta-TP/assets/94845990/973682bd-94c0-433b-9915-82bf9a849f01" alt="Ilha de Koch" width="300" height="300">
 </p>
 <p align="center">
-  <img src="https://github.com/Igoreduardobraga/Matematica-Discreta-TP/blob/main/img/Novo%20Fractal/S%C3%A9timo%20est%C3%A1gio.png" alt="Fractal definido por mim" width="500" height="500">
+  <img src="https://github.com/Igoreduardobraga/Matematica-Discreta-TP/blob/main/img/Novo%20Fractal/S%C3%A9timo%20est%C3%A1gio.png" alt="Fractal definido por mim" width="300" height="300">
 </p>
 
 ## Esse trabalho consiste em três programas:
