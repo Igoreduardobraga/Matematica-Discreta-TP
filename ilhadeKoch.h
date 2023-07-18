@@ -4,62 +4,75 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-extern FILE *arq_axioma, *estagio1, *arq_final;
+extern FILE *arquivo_1, *arquivo_2, *arq_final;
 extern char caractere;
 
 void escreverAxioma(char axioma[], char regra[]);
 
-void ilhadeKoch(char axioma[], char regra[]){
+void ilhadeKoch(char axioma[], char regra[], int angulo){
 
+    // Escreve o axioma no auxiliar 1
     escreverAxioma(axioma, regra);
 
-    estagio1 = fopen("estagio1.txt", "w");
+    // Abre o arquivo_2 e arq_final em modo escrita
+    arquivo_2 = fopen("arq_aux2.txt", "w");
     arq_final = fopen("saidas/ilha_de_Koch.txt", "w");
 
+    // Escreve o axioma, angulo e regra no arquivo de final
     fprintf(arq_final, "ILHA DE KOCH\n\nAxioma: F+F+F+F\nÂngulo: 90\nRegra: F+F-F-FFF+F+F-F");
-    fprintf(arq_final, "\n\n-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n");
-    fprintf(arq_final, "ESTÁGIO 1: %s", axioma);
+    fprintf(arq_final, "\n\n-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n");
+    
+    // Escreve o estágio 1 do factal ilha de Koch, que corresponde ao seu axioma
+    fprintf(arq_final, "ESTÁGIO 1:\n\n%s", axioma);
+
     int i;
+    // Roda o progama 4 vezes. Cada iteração do loop for gera um estágio do fractal
+    // Como o estágio 1 corresponde ao axioma no fractal de ilha de Koch, rodamos o for 3 vezes, de i=2 até i=5
     for(i = 2 ; i<5 ; i++){
-        while ((caractere = fgetc(arq_axioma)) != EOF) {
+        while ((caractere = fgetc(arquivo_1)) != EOF) {
             if(caractere=='F'){
-                fputs(regra, estagio1);
+                fputs(regra, arquivo_2);
             }
             else{
-                fputc(caractere, estagio1);
+                fputc(caractere, arquivo_2);
             }
         }
 
+        // Determina qual arquivo TXT deve ser aberto em modo leitura para que seu conteúdo seja escrito no arquivo final
         if(i%2==0){
-            fclose(estagio1);
-            estagio1 = fopen("estagio1.txt", "r");
+            fclose(arquivo_2);
+            arquivo_2 = fopen("arq_aux2.txt", "r");
         }
         else if(i%2==1){
-            fclose(estagio1);
-            estagio1 = fopen("arq_axioma.txt", "r");
+            fclose(arquivo_2);
+            arquivo_2 = fopen("arq_aux1.txt", "r");
         }
 
-        fprintf(arq_final, "\n\n-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n");
-        fprintf(arq_final, "ESTÁGIO %d: ", i);
-        while ((caractere = fgetc(estagio1)) != EOF) {
+        fprintf(arq_final, "\n\n-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n");
+        fprintf(arq_final, "ESTÁGIO %d:\n\n", i);
+
+        // Escreve o estágio no arquivo final
+        while ((caractere = fgetc(arquivo_2)) != EOF) {
             fputc(caractere, arq_final);
         }
 
-        fclose(arq_axioma);
-        fclose(estagio1);
+        fclose(arquivo_1);
+        fclose(arquivo_2);
 
+        // Determina qual arquivo deve ser aberto em modo leitura e qual deve ser aberto em modo escrita
         if(i%2==0){
-            arq_axioma = fopen("estagio1.txt", "r");
-            estagio1 = fopen("arq_axioma.txt", "w");
+            arquivo_1 = fopen("arq_aux2.txt", "r");
+            arquivo_2 = fopen("arq_aux1.txt", "w");
         }
         else if(i%2==1){
-            arq_axioma = fopen("arq_axioma.txt", "r");
-            estagio1 = fopen("estagio1.txt", "w");
+            arquivo_1 = fopen("arq_aux1.txt", "r");
+            arquivo_2 = fopen("arq_aux2.txt", "w");
         }
     }
+    // Fecha o arquivo final e remove os arquivos auxiliares
     fclose(arq_final);
-    remove("estagio1.txt");
-    remove("arq_axioma.txt");
+    remove("arq_aux2.txt");
+    remove("arq_aux1.txt");
 }
 
 #endif

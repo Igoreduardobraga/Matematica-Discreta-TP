@@ -5,12 +5,8 @@
 #include "espacodePeano.h"
 #include "novoFractal.h"
 
-FILE *arq_axioma, *estagio1, *arq_final;
+FILE *arquivo_1, *arquivo_2, *arq_final;
 char caractere;
-
-// void ilhadeKoch(char axioma[], char regra[]);
-// void espacodePeano(char axioma[], char regra1[], char regra2[]);
-// void fractalMisto(char axioma[], char regra[]);
 
 void escreverAxioma(char axioma[], char regra[]);
 void removerEspacos(char* string);
@@ -19,34 +15,40 @@ int main(){
 
     char *axioma = (char*)malloc((10 + 1) * sizeof(char));
     char *regra = (char*)malloc((40 + 1) * sizeof(char));
-    int fractal;
+    int fractal, angulo;
 
     // strcpy(axioma,"Y");
     // strcpy(regra,"XFYFX+F+YFXFY-F-XFYFX");
     printf("Fractal: ");
     scanf("%d", &fractal);
-    printf("Axioma: ");
-    scanf("%s", axioma);
 
     if(fractal==5){
+        printf("Axioma: ");
+        scanf("%s", axioma);
+        //printf("Angulo: ");
+        //scanf("%d", &angulo);
         printf("Regra: ");
         scanf("%s", regra);
-        ilhadeKoch(axioma,regra);
+        ilhadeKoch(axioma,regra,angulo);
     }
     else if(fractal==7){
         char *regra2 = (char*)malloc((40 + 1) * sizeof(char));
+        printf("Axioma: ");
+        scanf("%s", axioma);
+        //printf("Angulo: ");
+        //scanf("%d", &angulo);
         printf("Regra 1: ");
         scanf("%s", regra);
         printf("Regra 2: ");
         scanf("%s", regra2);
         removerEspacos(regra);
         removerEspacos(regra2);
-        espacodePeano(axioma,regra, regra2);
+        espacodePeano(axioma,regra, regra2, angulo);
         free(regra2);
     }
     else{
         // strcpy(regra2,"-YF+XFX+FY");
-        novoFractal("YY","-YF+XFX+FY", "YFXFY-F-XFYFX+F+YFXFY");    //angulo de 120
+        novoFractal("X+X+X+X+X+X","-YF+X+FY-", "+XF-X-FX+", 60);    //angulo de 60º
     }
 
     free(axioma);
@@ -55,6 +57,7 @@ int main(){
     return 0;
 }
 
+// Remove os espacos da string de entrada
 void removerEspacos(char* string) {
     int tamanho = strlen(string);
     int i, j;
@@ -73,19 +76,20 @@ void removerEspacos(char* string) {
     string[j] = '\0';
 }
 
+//Escreve o axioma no arquivo auxiliar 1
 void escreverAxioma(char axioma[],char regra[]){
-    arq_axioma = fopen("arq_axioma.txt","w");
-    if(arq_axioma == NULL){
+    arquivo_1 = fopen("arq_aux1.txt","w");
+    if(arquivo_1 == NULL){
         printf("Erro na abertura do arquivo!\n");
         exit(0);
     }
 
-    fputs(axioma,arq_axioma);
+    fputs(axioma,arquivo_1);
 
-    fclose(arq_axioma);
+    fclose(arquivo_1);
     
-    arq_axioma = fopen("arq_axioma.txt","r");
-    if(arq_axioma == NULL){
+    arquivo_1 = fopen("arq_aux1.txt","r");
+    if(arquivo_1 == NULL){
         printf("Erro na abertura do arquivo!\n");
         exit(0);
     }

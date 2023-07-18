@@ -1,1 +1,0 @@
-novoFractal("YY","-YF+XFX+FY", "YFXFY-F-XFYFX+F+YFXFY");

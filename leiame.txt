@@ -1,0 +1,15 @@
+O programa foi desenvolvido a partir da linguagem C. Para a compilação utilizou-se o compilador GCC.
+
+Instruções para executar o programa:
+
+Compliação: gcc main.c 
+
+Executar o código: ./a.out
+
+INFORMAÇÕES IMPORTANTES!!
+
+Para escolher o fractal definido por mim (novo fractal), basta colocar qualquer número diferente de 5 e 7 (definem os fractais Ilha de Koch e Espaço de Peano respectivamente) ao rodar o programa.
+
+As saidas de cada programa é organizada na pasta saidas. Portanto, para ter acesso a elas, basta abrir essa pasta
+
+As imagens de cada fractal foram organizadas na pasta img

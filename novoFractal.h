@@ -4,65 +4,77 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-extern FILE *arq_axioma, *estagio1, *arq_final;
+extern FILE *arquivo_1, *arquivo_2, *arq_final;
 extern char caractere;
 
 void escreverAxioma(char axioma[],char regra[]);
 
-void novoFractal(char axioma[], char regra1[], char regra2[]){
+void novoFractal(char axioma[], char regra1[], char regra2[], int angulo){
     
+    // Escreve o axioma no arquivo auxiliar 1
     escreverAxioma(axioma,regra1);
 
-    estagio1 = fopen("estagio1.txt", "w");
+    // Abre o arquivo_2 e arq_final em modo escrita
+    arquivo_2 = fopen("arq_aux2.txt", "w");
     arq_final = fopen("saidas/novo_Fractal.txt", "w");
 
-    fprintf(arq_final, "NOVO FRACTAL\n\n");
+    // Escreve o axioma, angulo e regra no arquivo de final
+    fprintf(arq_final, "NOVO FRACTAL\n\nAxioma: X+X+X+X+X+X\nÂngulo: 60\nRegra 1: -YF+X+FY-\nRegra 2: +XF-X-FX+");
+
     int i;
+    // Roda o progama 4 vezes. Cada iteração do loop for gera um estágio do fractal
     for(i = 1 ; i<5 ; i++){
-        while ((caractere = fgetc(arq_axioma)) != EOF) {
+        while ((caractere = fgetc(arquivo_1)) != EOF) {
+            // Troca o caractere "X" pela regra do fractal e escreve o conteúdo resultate no outro arquivo auxiliar
             if(caractere=='X'){
-            fputs(regra1, estagio1);
+                fputs(regra1, arquivo_2);
             }
+            // Troca o caractere "Y" pela regra do fractal e escreve o conteúdo resultate no outro arquivo auxiliar
             else if(caractere=='Y'){
-                fputs(regra2, estagio1);
+                fputs(regra2, arquivo_2);
             }
             else{
-                fputc(caractere, estagio1);
+                fputc(caractere, arquivo_2);
             }
         }
 
+        // Determina qual arquivo TXT deve ser aberto em modo leitura para que seu conteúdo seja escrito no arquivo final
         if(i%2==1){
-            fclose(estagio1);
-            estagio1 = fopen("estagio1.txt", "r");
+            fclose(arquivo_2);
+            arquivo_2 = fopen("arq_aux2.txt", "r");
         }
         else if(i%2==0){
-            fclose(estagio1);
-            estagio1 = fopen("arq_axioma.txt", "r");
+            fclose(arquivo_2);
+            arquivo_2 = fopen("arq_aux1.txt", "r");
         }
 
-        fprintf(arq_final, "\n\n-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n");
-        fprintf(arq_final, "ESTÁGIO %d: ", i);
-        while((caractere = fgetc(estagio1)) != EOF){
+        fprintf(arq_final, "\n\n-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n");
+        fprintf(arq_final, "ESTÁGIO %d:\n\n", i);
+
+        // Escreve o estágio no arquivo final sem os símbolos "X" e "Y"
+        while((caractere = fgetc(arquivo_2)) != EOF){
             if(caractere!='X' && caractere!='Y'){
                 fputc(caractere, arq_final);
             }
         }
 
-        fclose(arq_axioma);
-        fclose(estagio1);
+        fclose(arquivo_1);
+        fclose(arquivo_2);
 
+        // Determina qual arquivo deve ser aberto em modo leitura e qual deve ser aberto em modo escrita
         if(i%2==1){
-            arq_axioma = fopen("estagio1.txt", "r");
-            estagio1 = fopen("arq_axioma.txt", "w");
+            arquivo_1 = fopen("arq_aux2.txt", "r");
+            arquivo_2 = fopen("arq_aux1.txt", "w");
         }
         else if(i%2==0){
-            arq_axioma = fopen("arq_axioma.txt", "r");
-            estagio1 = fopen("estagio1.txt", "w");
+            arquivo_1 = fopen("arq_aux1.txt", "r");
+            arquivo_2 = fopen("arq_aux2.txt", "w");
         }
     }
+    //Fecha o arquivo final e remove os arquivos auxiliares
     fclose(arq_final);
-    remove("estagio1.txt");
-    remove("arq_axioma.txt");
+    remove("arq_aux2.txt");
+    remove("arq_aux1.txt");
 }
 
 #endif
