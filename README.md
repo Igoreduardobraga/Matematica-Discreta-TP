@@ -12,9 +12,9 @@ Trabalho pratico que consiste em criar fractais na forma de L-sistemas a partir 
 
 ## Esse trabalho consiste em três programas:
 
-1) programa que gera os 4 primeiros estágios do fractal Ilha de Koch
-2) programa que gera os 4 primeiros estágios do fractal Espaço de Peano
-3) programa que gera os 4 primeiros estágios do fractal definido por mim
+1) Programa que gera os 4 primeiros estágios do fractal Ilha de Koch
+2) Programa que gera os 4 primeiros estágios do fractal Espaço de Peano
+3) Programa que gera os 4 primeiros estágios do fractal definido por mim
 
 ## Como compilar e executar
 
