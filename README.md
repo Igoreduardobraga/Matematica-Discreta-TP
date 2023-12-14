@@ -10,23 +10,23 @@ Trabalho pratico que consiste em criar fractais na forma de L-sistemas a partir 
   <img src="https://github.com/Igoreduardobraga/Matematica-Discreta-TP/blob/main/img/Novo%20Fractal/S%C3%A9timo%20est%C3%A1gio.png" alt="Fractal definido por mim" width="300" height="300">
 </p>
 
-## Esse trabalho consiste em três programas:
+<h1>Esse trabalho consiste em três programas:</h1>
+    <ol>
+        <li>Programa que gera os 4 primeiros estágios do fractal Ilha de Koch</li>
+        <li>Programa que gera os 4 primeiros estágios do fractal Espaço de Peano</li>
+        <li>Programa que gera os 4 primeiros estágios do fractal definido por mim</li>
+    </ol>
 
-1) Programa que gera os 4 primeiros estágios do fractal Ilha de Koch
-2) Programa que gera os 4 primeiros estágios do fractal Espaço de Peano
-3) Programa que gera os 4 primeiros estágios do fractal definido por mim
+  <h1>Como compilar e executar?</h2>
+    <ol>
+        <li><code>gcc main.c</code></li>
+        <li><code>./a.out</code></li>
+    </ol>
 
-## Como compilar e executar
-
-1) gcc main.c
-2) ./a.out
-
-## INFORMAÇÕES IMPORTANTES!!
-
-* Para escolher o fractal definido por mim (novo fractal), basta colocar qualquer número diferente de 5 e 7 (definem os fractais Ilha de Koch e Espaço de Peano respectivamente) ao rodar o programa.
-
-* As saidas de cada programa é organizada na pasta saidas. Portanto, para ter acesso a elas, basta abrir essa pasta
-
-* A partir dessas saídas em formato de string, é possivel vizualizar as imagens a partir da ferramenta de L-system generator do site onlinemathtools
-
-* Detalhes sobre implementação e análise do código e projeto foram documentadas e estão disponíveis no arquivo "documentação.pdf"
+  <h1>INFORMAÇÕES IMPORTANTES!!</h2>
+    <ul>
+        <li>Para escolher o fractal definido por mim (novo fractal), basta colocar qualquer número diferente de 5 e 7 (definem os fractais Ilha de Koch e Espaço de Peano, respectivamente) ao rodar o programa.</li>
+        <li>As saídas de cada programa são organizadas na pasta <code>saidas</code>. Portanto, para ter acesso a elas, basta abrir essa pasta.</li>
+        <li>A partir dessas saídas em formato de string, é possível visualizar as imagens a partir da ferramenta de L-system generator do site <a href="https://www.onlinemathtools.com/l-system-generator">onlinemathtools</a>.</li>
+        <li>Detalhes sobre implementação e análise do código e projeto foram documentados e estão disponíveis no arquivo <code>documentação.pdf</code>.</li>
+    </ul>
